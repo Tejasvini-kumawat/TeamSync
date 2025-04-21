@@ -18,6 +18,7 @@ export interface TaskDocument extends Document {
   assignedTo: mongoose.Types.ObjectId | null;
   createdBy: mongoose.Types.ObjectId;
   dueDate: Date | null;
+  githubLink: string | null; // Added GitHub link
   createdAt: Date;
   updatedAt: Date;
 }
@@ -71,6 +72,11 @@ const taskSchema = new Schema<TaskDocument>(
     },
     dueDate: {
       type: Date,
+      default: null,
+    },
+    githubLink: {
+      type: String,
+      trim: true,
       default: null,
     },
   },

@@ -15,6 +15,7 @@ export const createTaskService = async (
     status: string;
     assignedTo?: string | null;
     dueDate?: string;
+    githubLink?: string;
   }
 ) => {
   const { title, description, priority, status, assignedTo, dueDate } = body;
@@ -46,6 +47,7 @@ export const createTaskService = async (
     workspace: workspaceId,
     project: projectId,
     dueDate,
+    githubLink: body.githubLink || null,
   });
 
   await task.save();

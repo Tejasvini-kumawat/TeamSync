@@ -1,5 +1,6 @@
 import { Column, ColumnDef, Row } from "@tanstack/react-table";
 import { format } from "date-fns";
+import { ExternalLink } from "lucide-react";
 
 import { DataTableColumnHeader } from "./table-column-header";
 import { DataTableRowActions } from "./table-row-actions";
@@ -201,6 +202,28 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
               <span>{priority.label}</span>
             </Badge>
           </div>
+        );
+      },
+    },
+    {
+      accessorKey: "githubLink",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="GitHub Link" />
+      ),
+      cell: ({ row }) => {
+        const githubLink = row.original.githubLink;
+        if (!githubLink) return null;
+
+        return (
+          <a
+            href={githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-blue-600 hover:text-blue-800"
+          >
+            <span className="truncate max-w-[200px]">{githubLink}</span>
+            <ExternalLink className="h-4 w-4" />
+          </a>
         );
       },
     },

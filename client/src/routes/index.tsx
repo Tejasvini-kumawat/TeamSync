@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./protected.route";
 import AuthRoute from "./auth.route";
+import EditTask from "@/components/EditTask";
 import {
   authenticationRoutePaths,
   baseRoutePaths,
@@ -14,6 +15,11 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route
+  path="/workspace/:workspaceId/project/:projectId/task/:taskId/edit"
+  element={<EditTask/>}
+/>
+
         <Route element={<BaseLayout />}>
           {baseRoutePaths.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />

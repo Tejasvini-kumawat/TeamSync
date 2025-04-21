@@ -124,6 +124,9 @@ export default function CreateTaskForm(props: {
     dueDate: z.date({
       required_error: "A date of birth is required.",
     }),
+    githubLink: z.string().url({
+      message: "Please enter a valid GitHub URL",
+    }).optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -132,6 +135,7 @@ export default function CreateTaskForm(props: {
       title: "",
       description: "",
       projectId: projectId ? projectId : "",
+      githubLink: "",
     },
   });
 
@@ -448,6 +452,32 @@ export default function CreateTaskForm(props: {
                         ))}
                       </SelectContent>
                     </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* {GitHub Link} */}
+            <div>
+              <FormField
+                control={form.control}
+                name="githubLink"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="dark:text-[#f1f7feb5] text-sm">
+                      GitHub Link
+                      <span className="text-xs font-extralight ml-2">
+                        Optional
+                      </span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="https://github.com/username/repo"
+                        className="!h-[48px]"
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
